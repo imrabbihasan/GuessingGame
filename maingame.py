@@ -19,35 +19,55 @@ def display_header():
     print("╚═══════════════════════════════════════╝")
 
 
-def display_rules(max_attempts):
+def display_rules(max_attempts, max_range):
     print("\nRules:")
     print(f"1. You have {max_attempts} attempts to guess the secret number.")
-    print("2. The secret number is between 1 and 100.")
+    print(f"2. The secret number is between 1 and {max_range}.")
     print("3. After each guess, you'll get feedback if your guess is to high or too low.")
 
 
-def get_user_guess():
+def get_user_guess(max_range):
     while True:
+        guess = input(f"Enter your guess (1-{max_range}) or 'quit' to exit: ")
+        if guess.lower() == 'quit':
+            return None
         try:
-            guess = int(input("Enter your guess: "))
-            if 1 <= guess <= 100:
+            guess = int(guess)
+            if 1 <= guess <= max_range:
                 return guess
             else:
-                print("Invalid input! Please enter a number between 1 and 100.")
+                print(f"Invalid input! Please enter a number between 1 and {max_range}.")
         except ValueError:
             print("Invalid input! Please enter a number.")
 
 
 def play_game():
+    print("Welcome to the game! You can quit at any time by typing 'quit'.")
     # clear_console()
     display_header()
-    secret_number = random.randint(1, 100)
-    max_attempts = 10
+    difficulty = input("Choose difficulty (easy/medium/hard): ").lower()
+    while difficulty not in ["easy", "medium", "hard"]:
+        print("Invalid difficulty level! Please choose either 'easy', 'medium', or 'hard'.")
+        display_header()
+        difficulty = input("Choose difficulty (easy/medium/hard): ").lower()
+    if difficulty == "easy":
+        max_range = 50
+        max_attempts = 10
+    elif difficulty == "medium":
+        max_range = 500
+        max_attempts = 7
+    else: # difficulty == "hard"
+        max_range = 100
+        max_attempts = 5
+    secret_number = random.randint(1, max_range)
     attempts = 0
-    display_rules(max_attempts)
+    display_rules(max_attempts, max_range)
 
     while attempts < max_attempts:
-        guess = get_user_guess()
+        guess = get_user_guess(max_range)
+        if guess is None:
+            print("You chose to quit the game. Welcome to play again!")
+            return
         attempts += 1
 
         if guess < secret_number:
