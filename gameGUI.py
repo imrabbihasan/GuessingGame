@@ -6,6 +6,7 @@ import random
 # Create a class called GuessingGame
 class GuessingGame:
     def __init__(self, master):
+        self.guess_entry = None
         self.master = master
         self.master.title("Guessing Game")
 
@@ -18,15 +19,16 @@ class GuessingGame:
         self.attempts = None
 
         # Create the widgets for the GUI and pack them into the window (master)
-        self.rules_label = tk.Label(master, text="")
+        self.rules_label = tk.Label(master, text="", anchor='center', justify='center')
         self.rules_label.pack()
 
         # Create a label for the difficulty and pack it into the window (master)
-        self.difficulty_label = tk.Label(master, text="Choose difficulty (easy/medium/hard):")
+        self.difficulty_label = tk.Label(master, text="Choose difficulty (easy/medium/hard):", anchor='center',
+                                         justify='center')
         self.difficulty_label.pack()
 
         # Create an entry for the difficulty and pack it into the window (master)
-        self.difficulty_label = tk.Label(master, text="")
+        self.difficulty_label = tk.Label(master, text="", anchor='center', justify='center')
         self.difficulty_label.pack()
 
         # Create an entry for the difficulty and pack it into the window (master)
@@ -37,12 +39,18 @@ class GuessingGame:
         self.start_button = tk.Button(master, text="Start Game", command=self.start_game)
         self.start_button.pack()
 
-        # Create a play again button and pack it into the window (master)
-        self.guess_lable = tk.Label(master, text="Enter you guess:")
-        self.guess_lable.pack()
+        # Bind the Enter key to the start_game method
+        self.diffculty_entry.bind("<Return>", self.start_game)
 
         # Create a play again button and pack it into the window (master)
-        self.remaining_attempts_label = tk.Label(master, text="")
+        self.guess_lable = tk.Label(master, text="Enter you guess:", anchor='center', justify='center')
+        self.guess_lable.pack()
+
+        # Bind the Enter key to the check_guess method
+        # self.guess_entry.bind("<Return>", self.check_guess)
+
+        # Create a play again button and pack it into the window (master)
+        self.remaining_attempts_label = tk.Label(master, text="", anchor='center', justify='center')
         self.remaining_attempts_label.pack()
 
         # Create an entry for the guess and pack it into the window (master)
@@ -50,12 +58,28 @@ class GuessingGame:
         self.guess_entry.pack()
 
         # Create a result label and pack it into the window (master)
-        self.result_label = tk.Label(master, text="")
+        self.result_label = tk.Label(master, text="", anchor='center', justify='center')
         self.result_label.pack()
 
+        # Create an icon for the Guess button
+        self.guess_icon = tk.PhotoImage(file="guess_icon.png", )
+
+        # Resize the icon
+        self.guess_icon = self.guess_icon.subsample(2, 2)
+
         # Create a guess button and pack it into the window (master)
-        self.guess_button = tk.Button(master, text="Guess", command=self.check_guess)
+        self.guess_button = tk.Button(master, text="Guess", command=self.check_guess, image=self.guess_icon, compound='left', bg='green', fg='black')
         self.guess_button.pack()
+
+        # Create an icon for the Play Again
+        self.play_again_button_icon = tk.PhotoImage(file="play_again.png")
+
+        # Resize the icon
+        self.play_again_button_icon = self.play_again_button_icon.subsample(3, 3)
+
+        # Create a play again button
+        self.play_again_button = tk.Button(master, text="Play Again", command=self.play_again, image=self.play_again_button_icon, compound='left', bg='red', fg='red')
+        self.play_again_button.pack()
 
     # Define a method to update the difficulty label with the current difficulty
     def update_difficulty(self, difficulty):
@@ -75,7 +99,7 @@ class GuessingGame:
         self.remaining_attempts_label['text'] = remaining_attempts_text
 
     # Define a method to start the game
-    def start_game(self):
+    def start_game(self, event=None):
         difficulty = self.diffculty_entry.get().lower()
         if difficulty == "easy":
             self.max_range = 50
@@ -115,7 +139,7 @@ class GuessingGame:
             self.master.quit()
 
     # Define a method to check the user's guess
-    def check_guess(self):
+    def check_guess(self, event=None):
         self.attempts += 1
         self.remaining_attempts_attempts()
 
@@ -136,6 +160,8 @@ class GuessingGame:
 
 # Create the main window and start the application
 root = tk.Tk()
+# Set the size to 500x500 pixels (width x height) using the geometry method of the root window object (root)
+root.geometry("500x500")
 # Create an instance of the GuessingGame class
 my_game = GuessingGame(root)
 # Start the application
