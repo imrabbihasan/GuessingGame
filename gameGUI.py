@@ -140,11 +140,19 @@ class GuessingGame:
 
     # Define a method to check the user's guess
     def check_guess(self, event=None):
+        # Get the user's guess from the guess entry
+        guess = self.guess_entry.get()
+
+        # Check if the user has entered a guess
+        if not guess:
+            self.result_label['text'] = "Please enter a guess."
+            return
+
         self.attempts += 1
         self.remaining_attempts_attempts()
 
         # Get the user's guess from the guess entry
-        guess = int(self.guess_entry.get())
+        guess = int(guess)
 
         if guess < self.secret_number:
             self.result_label['text'] = "Too low! Try again."
@@ -155,7 +163,10 @@ class GuessingGame:
 
         if self.attempts == self.max_attempts and guess != self.secret_number:
             self.result_label['text'] = f"Sorry, you ran out of attempts. The number was {self.secret_number}."
-            self.play_again()
+            # self.play_again()
+
+        # Clear the guess entry
+        self.guess_entry.delete(0, 'end')
 
 
 # Create the main window and start the application
