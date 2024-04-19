@@ -164,6 +164,8 @@ class GuessingGame:
         if self.attempts == self.max_attempts and guess != self.secret_number:
             self.result_label['text'] = f"Sorry, you ran out of attempts. The number was {self.secret_number}."
             # self.play_again()
+            tk.messagebox.showinfo("Game Over", "Game Over")
+            self.start_game()
 
         # Clear the guess entry
         self.guess_entry.delete(0, 'end')
