@@ -19,16 +19,16 @@ class GuessingGame:
         self.attempts = None
 
         # Create the widgets for the GUI and pack them into the window (master)
-        self.rules_label = tk.Label(master, text="", anchor='center', justify='center')
+        self.rules_label = tk.Label(master, text="", anchor='center', justify='center', bg='light blue')
         self.rules_label.pack()
 
         # Create a label for the difficulty and pack it into the window (master)
         self.difficulty_label = tk.Label(master, text="Choose difficulty (easy/medium/hard):", anchor='center',
-                                         justify='center')
+                                         justify='center', bg='light blue')
         self.difficulty_label.pack()
 
         # Create an entry for the difficulty and pack it into the window (master)
-        self.difficulty_label = tk.Label(master, text="", anchor='center', justify='center')
+        self.difficulty_label = tk.Label(master, text="", anchor='center', justify='center', bg='light blue')
         self.difficulty_label.pack()
 
         # Create an entry for the difficulty and pack it into the window (master)
@@ -36,21 +36,21 @@ class GuessingGame:
         self.diffculty_entry.pack()
 
         # Create a start button and pack it into the window (master)
-        self.start_button = tk.Button(master, text="Start Game", command=self.start_game)
+        self.start_button = tk.Button(master, text="Start Game", command=self.start_game, bg= 'light blue')
         self.start_button.pack()
 
         # Bind the Enter key to the start_game method
         self.diffculty_entry.bind("<Return>", self.start_game)
 
         # Create a play again button and pack it into the window (master)
-        self.guess_lable = tk.Label(master, text="Enter you guess:", anchor='center', justify='center')
+        self.guess_lable = tk.Label(master, text="Enter you guess:", anchor='center', justify='center', bg='light blue')
         self.guess_lable.pack()
 
         # Bind the Enter key to the check_guess method
         # self.guess_entry.bind("<Return>", self.check_guess)
 
         # Create a play again button and pack it into the window (master)
-        self.remaining_attempts_label = tk.Label(master, text="", anchor='center', justify='center')
+        self.remaining_attempts_label = tk.Label(master, text="", anchor='center', justify='center', bg='light blue')
         self.remaining_attempts_label.pack()
 
         # Create an entry for the guess and pack it into the window (master)
@@ -58,7 +58,7 @@ class GuessingGame:
         self.guess_entry.pack()
 
         # Create a result label and pack it into the window (master)
-        self.result_label = tk.Label(master, text="", anchor='center', justify='center')
+        self.result_label = tk.Label(master, text="", anchor='center', justify='center', bg='light blue')
         self.result_label.pack()
 
         # Create an icon for the Guess button
@@ -177,5 +177,8 @@ root = tk.Tk()
 root.geometry("500x500")
 # Create an instance of the GuessingGame class
 my_game = GuessingGame(root)
+
+# Set the Background color of the window
+root.configure(bg='light blue')
 # Start the application
 root.mainloop()
