@@ -36,7 +36,7 @@ class GuessingGame:
         self.diffculty_entry.pack()
 
         # Create a start button and pack it into the window (master)
-        self.start_button = tk.Button(master, text="Start Game", command=self.start_game, bg= 'light blue')
+        self.start_button = tk.Button(master, text="Start Game", command=self.start_game, bg='light pink', fg='black')
         self.start_button.pack()
 
         # Bind the Enter key to the start_game method
@@ -68,7 +68,8 @@ class GuessingGame:
         self.guess_icon = self.guess_icon.subsample(2, 2)
 
         # Create a guess button and pack it into the window (master)
-        self.guess_button = tk.Button(master, text="Guess", command=self.check_guess, image=self.guess_icon, compound='left', bg='green', fg='black')
+        self.guess_button = tk.Button(master, text="Guess", command=self.check_guess, image=self.guess_icon,
+                                      compound='left', bg='green', fg='black')
         self.guess_button.pack()
 
         # Create an icon for the Play Again
@@ -78,7 +79,8 @@ class GuessingGame:
         self.play_again_button_icon = self.play_again_button_icon.subsample(3, 3)
 
         # Create a play again button
-        self.play_again_button = tk.Button(master, text="Play Again", command=self.play_again, image=self.play_again_button_icon, compound='left', bg='red', fg='red')
+        self.play_again_button = tk.Button(master, text="Play Again", command=self.play_again,
+                                           image=self.play_again_button_icon, compound='left', bg='red', fg='red')
         self.play_again_button.pack()
 
     # Define a method to update the difficulty label with the current difficulty
@@ -174,7 +176,7 @@ class GuessingGame:
 # Create the main window and start the application
 root = tk.Tk()
 # Set the size to 500x500 pixels (width x height) using the geometry method of the root window object (root)
-root.geometry("500x500")
+root.geometry("500x400")
 # Create an instance of the GuessingGame class
 my_game = GuessingGame(root)
 
