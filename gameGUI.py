@@ -18,6 +18,13 @@ class GuessingGame:
         self.secret_number = None
         self.attempts = None
 
+        # Initialize the player's score
+        self.score = 0
+
+        # Create a label to display to the player's score
+        self.score_label = tk.Label(master, text=f"Score: {self.score}", anchor='center', justify='center', bg='light blue')
+        self.score_label.pack()
+
         # Create the widgets for the GUI and pack them into the window (master)
         self.rules_label = tk.Label(master, text="", anchor='center', justify='center', bg='light blue')
         self.rules_label.pack()
@@ -162,6 +169,11 @@ class GuessingGame:
             self.result_label['text'] = "Too high! Try again."
         else:
             self.result_label['text'] = f"Congratulations! You guessed the number in {self.attempts} attempts."
+
+            # Update the player's score
+            self.score += 1
+            # Update the score label
+            self.score_label['text'] = f"Score: {self.score}"
 
         if self.attempts == self.max_attempts and guess != self.secret_number:
             self.result_label['text'] = f"Sorry, you ran out of attempts. The number was {self.secret_number}."
